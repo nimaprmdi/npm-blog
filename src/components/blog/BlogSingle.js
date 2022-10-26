@@ -1,12 +1,14 @@
 import React from "react";
 import Loader from "../common/Loader";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import sanitizeHtml from "sanitize-html";
 import { useQuery } from "@apollo/client";
 import { GET_SINGLE_BLOG } from "../../graphql/query";
 import { useParams } from "react-router-dom";
 import { Avatar, Box, Container, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import sanitizeHtml from "sanitize-html";
+import CommentForms from "../comment/CommentForms";
+import Comments from "../comment/Comments";
 
 const BlogSingle = () => {
     const { slug } = useParams();
@@ -20,8 +22,6 @@ const BlogSingle = () => {
 
     if (loading) return <Loader />;
     if (errors) return <h4>Errors...</h4>;
-
-    console.log(data);
 
     return (
         <Container maxWidth="lg">
@@ -66,6 +66,14 @@ const BlogSingle = () => {
 
                 <Grid item xs={12} mt={5}>
                     <div dangerouslySetInnerHTML={{ __html: sanitizeHtml(data.post.content.html) }}></div>
+                </Grid>
+
+                <Grid item xs={12}>
+                    <CommentForms slug={slug} />
+                </Grid>
+
+                <Grid item xs={12}>
+                    <Comments slug={slug} />
                 </Grid>
             </Grid>
         </Container>

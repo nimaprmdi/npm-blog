@@ -1,11 +1,11 @@
 import React from "react";
 import sanitizeHtml from "sanitize-html";
+import CardEL from "../common/CardEL";
+import Loader from "../common/Loader";
 import { useQuery } from "@apollo/client";
 import { useParams } from "react-router-dom";
 import { GET_AUTHOR } from "../../graphql/query";
 import { Container, Grid, Avatar, Typography } from "@mui/material";
-import CardEL from "../common/CardEL";
-import Loader from "../common/Loader";
 
 const AuthorSingle = () => {
     const { slug } = useParams();
@@ -14,14 +14,10 @@ const AuthorSingle = () => {
         variables: { slug },
     });
 
-    // console.log({ data, errors, loading });
-
     if (loading) return <Loader />;
     if (errors) return <h4>Error...</h4>;
 
     const { author } = data;
-
-    console.log(author);
 
     return (
         <Container maxWidth="lg">
@@ -44,21 +40,16 @@ const AuthorSingle = () => {
                     </Grid>
 
                     <Grid item xs={12} mt={6}>
-                        <Typography component="h3" variant="h5" fontWeight="bold">
-                            Posts from {author.name}
-                        </Typography>
+                        {author.posts.length > 0 && (
+                            <Typography component="h3" variant="h5" fontWeight="bold">
+                                Posts from {author.name}
+                            </Typography>
+                        )}
 
                         <Grid container mt={2} spacing={2}>
                             {author.posts.map((post) => (
                                 <Grid key={post.id} item xs={12} sm={6} md={4}>
-                                    {console.log(post)}
-                                    <CardEL
-                                        title={post.title}
-                                        slug={post.slug}
-                                        coverPhoto={post.coverPhoto.url}
-                                        // author={author.name}
-                                        // authorPhoto={author.avatar.url}
-                                    />
+                                    <CardEL title={post.title} slug={post.slug} coverPhoto={post.coverPhoto.url} />
                                 </Grid>
                             ))}
                         </Grid>

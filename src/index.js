@@ -7,6 +7,7 @@ import theme from "./mui/theme";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { ThemeProvider } from "@mui/material";
 import { BrowserRouter } from "react-router-dom";
+import "react-toastify/dist/ReactToastify.css";
 
 const client = new ApolloClient({
     uri: process.env.REACT_APP_GRAPHCMS_URI,

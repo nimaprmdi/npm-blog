@@ -84,4 +84,14 @@ const GET_SINGLE_BLOG = gql`
     }
 `;
 
-export { GET_BLOG_INFO, GET_AUTHORS_INFO, GET_AUTHOR, GET_SINGLE_BLOG };
+const GET_POST_COMMENTS = gql`
+    query getComment($slug: String!) {
+        comments(where: { post: { slug: $slug } }) {
+            id
+            name
+            description
+        }
+    }
+`;
+
+export { GET_BLOG_INFO, GET_AUTHORS_INFO, GET_AUTHOR, GET_SINGLE_BLOG, GET_POST_COMMENTS };

@@ -8,12 +8,9 @@ import Loader from "../common/Loader";
 
 const Blogs = () => {
     const { data, loading, errors } = useQuery(GET_BLOG_INFO);
-    console.log({ data, loading, errors });
 
     if (loading) return <Loader />;
     if (errors) return <h4>Error...</h4>;
-
-    console.log({ data, loading, errors });
 
     const getAvatar = (post) => {
         if (post.authors) {
@@ -27,7 +24,6 @@ const Blogs = () => {
         <Grid container spacing={2}>
             {data.posts.map((post) => (
                 <Grid key={post.id} item xs={12} sm={6} md={4}>
-                    {console.log("post ,", post)}
                     <CardEL
                         title={post.title}
                         slug={post.slug}

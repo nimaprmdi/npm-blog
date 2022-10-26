@@ -14,8 +14,6 @@ import {
 import { Link } from "react-router-dom";
 
 const CardEL = ({ title, slug, coverPhoto, author, authorPhoto }) => {
-    console.log(authorPhoto);
-
     return (
         <Card sx={{ boxShadow: " 0px 4px 12px rgba(0,0,0,0.1)", borderRadius: 4 }}>
             {author && authorPhoto && (
