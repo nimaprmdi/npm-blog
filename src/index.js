@@ -6,6 +6,7 @@ import App from "./App";
 import theme from "./mui/theme";
 import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
 import { ThemeProvider } from "@mui/material";
+import { BrowserRouter } from "react-router-dom";
 
 const client = new ApolloClient({
     uri: process.env.REACT_APP_GRAPHCMS_URI,
@@ -14,11 +15,13 @@ const client = new ApolloClient({
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <React.StrictMode>
-        <ApolloProvider client={client}>
-            <ThemeProvider theme={theme}>
-                <App />
-            </ThemeProvider>
-        </ApolloProvider>
-    </React.StrictMode>
+    <BrowserRouter>
+        <React.StrictMode>
+            <ApolloProvider client={client}>
+                <ThemeProvider theme={theme}>
+                    <App />
+                </ThemeProvider>
+            </ApolloProvider>
+        </React.StrictMode>
+    </BrowserRouter>
 );
